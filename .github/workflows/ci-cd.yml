@@ -7,6 +7,10 @@ on:
 jobs:
   build_docker_image:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write     # ← This is the fix
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,6 +33,10 @@ jobs:
   run_docker_image:
     needs: build_docker_image
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write     # ← This is the fix
+
     steps:
       - name: Run the container
         run: |
